@@ -25,8 +25,8 @@ Site simples e rápido desenvolvido em **HTML, CSS e JavaScript puro** para insc
 
 ## 🌐 Link do Site
 
-👉 **[https://SEU_USUARIO.github.io/volei/](https://SEU_USUARIO.github.io/volei/)**
-*(substituir pelo link real quando publicar)*
+👉 **https://yjoaozinho.github.io/site-circuito-boga/**
+
 
 ---
 
