@@ -1,7 +1,5 @@
 import { GoogleGenAI } from "@google/genai";
 
-// --- ATENÇÃO: COLOQUE SUA API KEY AQUI ---
-const API_KEY = "PLACEHOLDER_API_KEY"; 
 
 // CONFIGURAÇÃO
 let spotsLeft = parseInt(localStorage.getItem("spotsLeft")) || 9;
