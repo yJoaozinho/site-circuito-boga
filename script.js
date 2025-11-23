@@ -4,7 +4,7 @@ import { GoogleGenAI } from "@google/genai";
 const API_KEY = "PLACEHOLDER_API_KEY"; 
 
 // CONFIGURAÇÃO
-let spotsLeft = 8;
+let spotsLeft = parseInt(localStorage.getItem("spotsLeft")) || 9;
 // Inicializa Ícones
 lucide.createIcons();
 
@@ -59,6 +59,7 @@ function finalizeRegistration() {
     sendWhatsappMessage();
 
     if (spotsLeft > 0) spotsLeft--;
+    localStorage.setItem("spotsLeft", spotsLeft); 
     updateSpotsDisplay();
     closeModal();
     showToast();
@@ -87,36 +88,98 @@ function showToast() {
     }, 5000);
 }
 
-async function generateName() {
+function generateName() {
     const originalIcon = `<i data-lucide="sparkles" width="20"></i>`;
-    
-    if (!API_KEY) {
-        alert("Para usar a IA, abra o arquivo script.js e adicione sua API KEY na linha 4.");
-        els.inputTeamName.value = "Os Reis da Areia";
-        return;
-    }
 
-    try {
-        els.btnGenerateAi.disabled = true;
-        els.btnGenerateAi.innerHTML = `<div class="animate-spin h-5 w-5 border-2 border-white rounded-full border-t-transparent"></div>`;
-        
-        const ai = new GoogleGenAI({ apiKey: API_KEY });
-        const response = await ai.models.generateContent({
-            model: 'gemini-2.5-flash',
-            contents: "Crie um nome curto, engraçado e criativo para uma dupla de vôlei de praia em português. Retorne APENAS o nome, sem aspas e sem explicação.",
-        });
+    // Lista de 20 nomes criativos
+    const names = [
+    "Os Reis da Areia",
+    "Vento Norte",
+    "Areia Selvagem",
+    "Dupla Tempestade",
+    "Maré Alta",
+    "Tsunami da Praia",
+    "Saque Mortal",
+    "Os Surfistas do Saque",
+    "Areia Quente",
+    "Pisa na Areia",
+    "Vôlei é Pouco",
+    "Os Estourados do Sol",
+    "Tempestade de Areia",
+    "Dupla do Arranque",
+    "Bravas da Praia",
+    "Sol & Pancada",
+    "Os Camisa de Sol",
+    "Areia Nervosa",
+    "Os Areieiros",
+    "Paredão da Praia",
+    "Dupla Raio Solar",
+    "Golpe de Areia",
+    "Areia Furiosa",
+    "Lobos da Praia",
+    "Os Sem Sol",
+    "Saque de Fogo",
+    "Vento & Vôlei",
+    "Areia Flamejante",
+    "Dupla Relâmpago",
+    "Tempestade Tropical",
+    "Pé na Areia",
+    "Torcida da Maré",
+    "Os Engolidores de Sol",
+    "Fúria da Praia",
+    "Os Encouraçados",
+    "Saque de Ouro",
+    "Os Navegantes",
+    "Dupla Horizonte",
+    "Tubarões da Areia",
+    "Arrebentação",
+    "Areia de Titânio",
+    "Saque Espacial",
+    "Dupla Eclipse",
+    "Sol na Testa",
+    "Os Furacões da Praia",
+    "Areia Iluminada",
+    "Dupla do Vento Forte",
+    "Os Estrondosos",
+    "As Lendas da Areia",
+    "Dupla do Sol Nascente",
+    "Saque Trem Bala",
+    "Os Guardiões da Areia",
+    "Areia de Fogo",
+    "Os Saltadores do Sol",
+    "Dupla Horizonte Azul",
+    "Impacto de Areia",
+    "Os Sons do Mar",
+    "Pancada Litorânea",
+    "Areia Inquebrável",
+    "Os Ventos Implacáveis",
+    "Sombra na Areia",
+    "Dupla do Mar Bravo",
+    "Sol & Tempestade",
+    "Dupla Cósmica",
+    "Areia Mística",
+    "Os Incendiários",
+    "Saque Final",
+    "Lanterna da Praia",
+    "Os Monarcas do Sol"
+];
 
-        els.inputTeamName.value = response.text ? response.text.trim() : "Dupla Imbatível";
+    // Carregando o spinner
+    els.btnGenerateAi.disabled = true;
+    els.btnGenerateAi.innerHTML = `<div class="animate-spin h-5 w-5 border-2 border-white rounded-full border-t-transparent"></div>`;
 
-    } catch (error) {
-        console.error("Erro AI:", error);
-        els.inputTeamName.value = "Dupla Imbatível";
-    } finally {
+    setTimeout(() => {
+        // Escolhe um nome aleatório
+        const randomName = names[Math.floor(Math.random() * names.length)];
+
+        els.inputTeamName.value = randomName;
+
         els.btnGenerateAi.disabled = false;
         els.btnGenerateAi.innerHTML = originalIcon;
         lucide.createIcons({ root: els.btnGenerateAi });
-    }
+    }, 600); // Delay só para simular "geração"
 }
+
 
 // --- ENVIAR PARA WHATSAPP QUANDO CONFIRMAR PAGAMENTO ---
 function sendWhatsappMessage() {
