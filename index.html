@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2º Circuito Boga de Vôlei de Praia</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Import Map para o Google GenAI -->
+    <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+  }
+}
+</script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              boga: {
+                yellow: '#FFD700',
+                blue: '#0057B8',
+                black: '#050505',
+                gray: '#1F1F1F'
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              display: ['Anton', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="bg-boga-black text-white antialiased">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-boga-black/90 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <div class="flex items-center gap-2">
+            <div class="bg-boga-yellow p-1.5 rounded-full">
+              <i data-lucide="trophy" class="h-6 w-6 text-boga-black"></i>
+            </div>
+            <span class="text-xl font-display tracking-wider text-white">
+              CIRCUITO <span class="text-boga-yellow">BOGA</span>
+            </span>
+          </div>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-8">
+              <a href="#sobre" class="hover:text-boga-yellow transition-colors px-3 py-2 text-sm font-medium">Sobre</a>
+              <a href="#cronograma" class="hover:text-boga-yellow transition-colors px-3 py-2 text-sm font-medium">Cronograma</a>
+              <a href="#premiacao" class="hover:text-boga-yellow transition-colors px-3 py-2 text-sm font-medium">Premiação</a>
+              <button id="nav-btn-subscribe" class="bg-boga-blue hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105">
+                Inscreva-se
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <div class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <!-- Background Elements -->
+      <div class="absolute inset-0 z-0">
+        <div class="absolute inset-0 bg-gradient-to-b from-boga-black/30 to-boga-black z-10"></div>
+        <!-- IMAGEM DE FUNDO -->
+        <img 
+          src="./image/logo.jpeg" 
+          alt="Beach Volleyball" 
+          class="w-full h-full object-cover opacity-40"
+        />
+      </div>
+
+      <div class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        
+        <!-- LOGO AREA -->
+        <div class="mb-8 relative group cursor-pointer transition-transform transform hover:scale-105">
+          <div class="w-48 h-48 md:w-64 md:h-64 rounded-full bg-black border-4 border-boga-yellow shadow-[0_0_50px_rgba(255,215,0,0.2)] flex items-center justify-center overflow-hidden">
+             <div class="relative w-full h-full bg-black flex items-center justify-center">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-32 h-32 rounded-full bg-boga-blue border-4 border-boga-yellow flex items-center justify-center overflow-hidden">
+                        <div class="w-full h-4 bg-boga-yellow rotate-45 absolute"></div>
+                        <div class="w-full h-4 bg-boga-yellow -rotate-45 absolute"></div>
+                    </div>
+                </div>
+                <div class="absolute top-8 flex gap-3">
+                    <span class="text-boga-yellow text-2xl">★</span>
+                    <span class="text-boga-yellow text-2xl">★</span>
+                    <span class="text-boga-yellow text-2xl">★</span>
+                </div>
+                <div class="absolute bottom-10 text-center leading-tight">
+                    <p class="text-white font-display text-xl tracking-wide">2º CIRCUITO</p>
+                    <p class="text-white font-display text-2xl tracking-wide text-boga-yellow">BOGA</p>
+                </div>
+             </div>
+          </div>
+        </div>
+
+        <h1 class="text-5xl md:text-7xl font-display tracking-tight text-white mb-4 drop-shadow-lg">
+          2º CIRCUITO <span class="text-boga-yellow">BOGA</span>
+          <br/>
+          DE VÔLEI DE PRAIA
+        </h1>
+
+        <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto">
+          Prepare sua dupla e venha dominar as areias! O torneio mais aguardado do ano está chegando.
+        </p>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10 w-full max-w-3xl">
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl flex items-center justify-center gap-3">
+            <i data-lucide="calendar" class="text-boga-yellow"></i>
+            <div class="text-left">
+              <p class="text-xs text-gray-400 uppercase font-bold">Data</p>
+              <p class="font-bold">26/11/2025 (Quarta)</p>
+            </div>
+          </div>
+          <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl flex items-center justify-center gap-3">
+            <i data-lucide="map-pin" class="text-boga-blue"></i>
+            <div class="text-left">
+              <p class="text-xs text-gray-400 uppercase font-bold">Local</p>
+              <p class="font-bold">Quadra de areia do IFPE - Campus Garanhuns</p>
+            </div>
+          </div>
+           <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-4 rounded-xl flex items-center justify-center gap-3">
+            <i data-lucide="users" class="text-green-400"></i>
+            <div class="text-left">
+              <p class="text-xs text-gray-400 uppercase font-bold">Vagas</p>
+              <p class="font-bold text-green-400"><span id="spots-display">10</span> Restantes</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row gap-4 items-center">
+            <!-- Botão de Inscrição -->
+            <button id="main-register-btn" class="px-10 py-4 bg-boga-yellow text-boga-black hover:bg-yellow-400 shadow-[0_0_20px_rgba(255,215,0,0.3)] rounded-full font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2 text-lg">
+                Garantir Inscrição - R$ 10,00
+            </button>
+            
+            <!-- Aviso de Esgotado (Oculto inicialmente) -->
+            <div id="sold-out-badge" class="hidden bg-red-500/20 border border-red-500 text-red-200 px-8 py-4 rounded-xl flex items-center gap-2">
+                <i data-lucide="alert-circle"></i>
+                <span class="font-bold">Inscrições Encerradas!</span>
+            </div>
+
+            <a href="#sobre" class="text-gray-400 hover:text-white underline transition-colors">
+                Saiba mais
+            </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SOBRE -->
+    <section id="sobre" class="py-20 bg-boga-black px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-3xl font-display text-white mb-6">Sobre o Torneio</h2>
+            <p class="text-lg text-gray-400 leading-relaxed">
+                O 2º Circuito Boga de Vôlei de Praia reúne as melhores duplas da região em um dia de muita competição, sol e diversão. 
+                Com uma estrutura profissional e arbitragem dedicada, oferecemos uma experiência única para atletas amadores e profissionais.
+                <br /><br />
+                Apenas <strong>10 vagas</strong> disponíveis para garantir a qualidade e organização dos jogos. Não fique de fora!
+            </p>
+        </div>
+    </section>
+
+    <!-- PREMIAÇÃO -->
+    <section id="premiacao" class="py-20 bg-boga-gray border-t border-b border-white/5 relative overflow-hidden">
+        <!-- Detalhes de fundo -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-boga-yellow rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 right-0 w-64 h-64 bg-boga-blue rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <h2 class="text-3xl md:text-4xl font-display text-white mb-2">Premiação</h2>
+            <p class="text-boga-yellow font-bold text-xl mb-12">Total de R$ 85,00 em prêmios</p>
+
+            <div class="flex flex-col md:flex-row justify-center items-end gap-6 md:gap-4">
+                
+                <!-- 1º Lugar (Ordem 1 no mobile, 2 no Desktop para ficar no meio) -->
+                <div class="order-1 md:order-2 w-full md:w-72 bg-gradient-to-b from-boga-yellow/20 to-boga-black border border-boga-yellow rounded-2xl p-8 flex flex-col items-center shadow-[0_0_30px_rgba(255,215,0,0.15)] transform hover:-translate-y-2 transition-transform relative">
+                    <div class="absolute -top-5 bg-boga-yellow text-boga-black font-bold px-4 py-1 rounded-full shadow-lg">
+                        CAMPEÃO
+                    </div>
+                    <div class="text-boga-yellow mb-2 font-display text-2xl">1º Lugar</div>
+                    <div class="text-5xl font-bold text-white mb-2">R$ 45,00</div>
+                    <i data-lucide="trophy" class="text-boga-yellow w-12 h-12 mt-4"></i>
+                </div>
+
+                <!-- 2º Lugar (Ordem 2 no mobile, 1 no Desktop para ficar na esquerda) -->
+                <div class="order-2 md:order-1 w-full md:w-64 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center transform hover:-translate-y-2 transition-transform">
+                    <div class="text-gray-300 mb-2 font-display text-xl">2º Lugar</div>
+                    <div class="text-3xl font-bold text-white mb-1">R$ 25,00</div>
+                    <div class="w-16 h-1 bg-gray-400 rounded-full mt-4"></div>
+                </div>
+
+                <!-- 3º Lugar (Ordem 3) -->
+                <div class="order-3 md:order-3 w-full md:w-64 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col items-center transform hover:-translate-y-2 transition-transform">
+                    <div class="text-amber-700 mb-2 font-display text-xl">3º Lugar</div>
+                    <div class="text-3xl font-bold text-white mb-1">R$ 15,00</div>
+                    <div class="w-16 h-1 bg-amber-700 rounded-full mt-4"></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CRONOGRAMA -->
+    <section id="cronograma" class="py-20 bg-boga-gray relative">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <div class="text-center mb-16">
+           <h2 class="text-4xl font-display text-white mb-4">Cronograma do Evento</h2>
+           <div class="h-1 w-20 bg-boga-yellow mx-auto rounded-full"></div>
+        </div>
+
+        <div class="relative space-y-8 before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-boga-blue before:to-transparent">
+          
+          <!-- Item 1 -->
+          <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-boga-blue bg-boga-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-boga-yellow z-10">
+              <i data-lucide="sun" width="20"></i>
+            </div>
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 p-6 rounded-xl border border-white/5 hover:border-boga-yellow/50 transition-colors shadow-lg">
+              <div class="flex items-center justify-between space-x-2 mb-1">
+                <div class="font-display text-xl text-white">Início dos Jogos</div>
+                <time class="font-mono text-sm text-boga-yellow font-bold">08:00</time>
+              </div>
+              <div class="text-gray-400 text-sm">Abertura da arena e início da fase de grupos (Manhã).</div>
+            </div>
+          </div>
+
+          <!-- Item 2 -->
+          <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-boga-blue bg-boga-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-boga-yellow z-10">
+              <i data-lucide="coffee" width="20"></i>
+            </div>
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 p-6 rounded-xl border border-white/5 hover:border-boga-yellow/50 transition-colors shadow-lg">
+              <div class="flex items-center justify-between space-x-2 mb-1">
+                <div class="font-display text-xl text-white">Pausa para Almoço</div>
+                <time class="font-mono text-sm text-boga-yellow font-bold">11:30</time>
+              </div>
+              <div class="text-gray-400 text-sm">Recuperação e hidratação dos atletas.</div>
+            </div>
+          </div>
+
+          <!-- Item 3 -->
+          <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-boga-blue bg-boga-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-boga-yellow z-10">
+              <i data-lucide="sun" width="20"></i>
+            </div>
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 p-6 rounded-xl border border-white/5 hover:border-boga-yellow/50 transition-colors shadow-lg">
+              <div class="flex items-center justify-between space-x-2 mb-1">
+                <div class="font-display text-xl text-white">Retorno das Atividades</div>
+                <time class="font-mono text-sm text-boga-yellow font-bold">13:00</time>
+              </div>
+              <div class="text-gray-400 text-sm">Reinício dos jogos decisivos da fase classificatória.</div>
+            </div>
+          </div>
+
+          <!-- Item 4 -->
+          <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-boga-blue bg-boga-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-boga-yellow z-10">
+              <i data-lucide="trophy" width="20"></i>
+            </div>
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 p-6 rounded-xl border border-white/5 hover:border-boga-yellow/50 transition-colors shadow-lg">
+              <div class="flex items-center justify-between space-x-2 mb-1">
+                <div class="font-display text-xl text-white">Finais</div>
+                <time class="font-mono text-sm text-boga-yellow font-bold">16:00</time>
+              </div>
+              <div class="text-gray-400 text-sm">Disputa pelo título do 2º Circuito Boga.</div>
+            </div>
+          </div>
+
+           <!-- Item 5 -->
+           <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full border border-boga-blue bg-boga-black shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 text-boga-yellow z-10">
+              <i data-lucide="trophy" width="20"></i>
+            </div>
+            <div class="w-[calc(100%-4rem)] md:w-[calc(50%-2.5rem)] bg-white/5 p-6 rounded-xl border border-white/5 hover:border-boga-yellow/50 transition-colors shadow-lg">
+              <div class="flex items-center justify-between space-x-2 mb-1">
+                <div class="font-display text-xl text-white">Encerramento</div>
+                <time class="font-mono text-sm text-boga-yellow font-bold">17:00</time>
+              </div>
+              <div class="text-gray-400 text-sm">Cerimônia de premiação.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-black text-white py-12 border-t border-white/10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <h2 class="text-2xl font-display text-boga-yellow mb-2">CIRCUITO BOGA</h2>
+          <p class="text-gray-500 text-sm max-w-xs">
+            Promovendo o esporte e a integração nas areias desde 2024.
+          </p>
+        </div>
+
+        <div class="text-center md:text-right text-sm text-gray-600">
+            <p>&copy; 2025 Circuito Boga.</p>
+            <p>Todos os direitos reservados.</p>
+            <p>made by melekel.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- MODAL DE INSCRIÇÃO -->
+    <div id="registration-modal" class="fixed inset-0 z-[100] overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+        <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            
+            <!-- Backdrop -->
+            <div id="modal-backdrop" class="fixed inset-0 bg-black/80 transition-opacity backdrop-blur-sm" aria-hidden="true"></div>
+    
+            <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+    
+            <div class="inline-block align-bottom bg-boga-gray rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg w-full border border-white/10 fade-in">
+              
+              <div class="absolute top-4 right-4">
+                <button id="modal-close-btn" class="text-gray-400 hover:text-white transition-colors">
+                  <i data-lucide="x" width="24"></i>
+                </button>
+              </div>
+    
+              <div class="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                
+                <!-- STEP 1: FORMULÁRIO -->
+                <div id="step-form" class="block">
+                    <h3 class="text-2xl leading-6 font-display text-white mb-2 text-center">Inscrição da Dupla</h3>
+                    <p class="text-sm text-gray-400 mb-6 text-center">Preencha os dados abaixo para garantir sua vaga.</p>
+                    
+                    <form id="registration-form" class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">Nome da Dupla</label>
+                            <div class="flex gap-2">
+                                <input id="input-team-name" type="text" required class="flex-1 bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-boga-yellow focus:border-transparent outline-none" placeholder="Ex: Os Reis da Praia">
+                                <button type="button" id="btn-generate-ai" class="bg-purple-600 hover:bg-purple-700 text-white p-2 rounded-lg transition-colors flex items-center justify-center w-12" title="Gerar nome com IA">
+                                    <i data-lucide="sparkles" width="20"></i>
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1 text-right">Usar IA para criar nome criativo</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Jogador 1</label>
+                                <input type="text" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-boga-yellow outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-300 mb-1">Jogador 2</label>
+                                <input type="text" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-boga-yellow outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1">WhatsApp para Contato</label>
+                            <input type="tel" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2 text-white focus:ring-2 focus:ring-boga-yellow outline-none" placeholder="(XX) 9XXXX-XXXX">
+                        </div>
+
+                        <div class="pt-4">
+                            <button type="submit" class="w-full bg-boga-yellow text-boga-black hover:bg-yellow-400 px-6 py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                                Continuar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- STEP 2: PAGAMENTO -->
+                <div id="step-payment" class="hidden text-center space-y-6">
+                    <h3 class="text-2xl leading-6 font-display text-white mb-2 text-center">Pagamento</h3>
+                    <p class="text-sm text-gray-400 mb-6 text-center">Realize o pagamento para confirmar.</p>
+
+                    <div class="bg-white/5 p-6 rounded-xl border border-white/10">
+                        <p class="text-gray-400 text-sm mb-2">Valor da Inscrição</p>
+                        <p class="text-3xl font-bold text-boga-yellow">R$ 10,00</p>
+                        <p class="text-xs text-gray-500 mt-1">por dupla</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <p class="font-bold text-white">Chave PIX (CPF):</p>
+                        <div class="bg-black p-3 rounded text-mono text-boga-blue select-all cursor-pointer border border-dashed border-gray-600">
+                            144.284.184-26
+                        </div>
+                        <p class="text-xs text-gray-400 mt-2">Envie o comprovante para o WhatsApp da organização.</p>
+                        <p class="text-xs text-gray-400 mt-2">Quando você clicar no botão “Confirmar Pagamento Enviado”, o sistema automaticamente enviará uma mensagem com todos os dados da sua inscrição diretamente para um dos organizadores.</p>
+                    </div>
+
+                    <button id="btn-confirm-payment" class="w-full bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-full font-bold transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+                        <i data-lucide="check-circle" width="18"></i>
+                        Confirmar Pagamento Enviado
+                    </button>
+                    
+                    <button id="btn-back-step" class="text-sm text-gray-400 hover:text-white underline block w-full mt-4">
+                        Voltar para dados
+                    </button>
+                </div>
+
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="success-toast" class="fixed bottom-5 right-5 bg-green-600 text-white px-6 py-4 rounded-xl shadow-2xl flex items-center gap-3 z-50 hidden">
+        <span class="bg-white text-green-600 rounded-full p-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+        </span>
+        <div>
+            <p class="font-bold">Inscrição Recebida!</p>
+            <p class="text-sm opacity-90">Nos vemos na areia!</p>
+        </div>
+    </div>
+
+    <!-- MAIN JAVASCRIPT -->
+    <script type="module" src="script.js"></script>
+</body>
+</html>

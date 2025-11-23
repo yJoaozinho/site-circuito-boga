@@ -1,0 +1,40 @@
+/* Custom Scrollbar */
+::-webkit-scrollbar { 
+    width: 8px; 
+}
+
+::-webkit-scrollbar-track { 
+    background: #1f1f1f; 
+}
+
+::-webkit-scrollbar-thumb { 
+    background: #FFD700; 
+    border-radius: 4px; 
+}
+
+::-webkit-scrollbar-thumb:hover { 
+    background: #e6c200; 
+}
+
+html { 
+    scroll-behavior: smooth; 
+}
+
+.hidden { 
+    display: none !important; 
+}
+
+.fade-in { 
+    animation: fadeIn 0.3s ease-in-out; 
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(10px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
