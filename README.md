@@ -25,8 +25,8 @@ Site simples e rápido desenvolvido em **HTML, CSS e JavaScript puro** para insc
 
 ## 🌐 Link do Site
 
-👉 **[https://SEU_USUARIO.github.io/volei/](https://SEU_USUARIO.github.io/volei/)**
-*(substituir pelo link real quando publicar)*
+👉 **https://yjoaozinho.github.io/site-circuito-boga/**
+
 
 ---
 
@@ -66,7 +66,7 @@ Nenhuma API paga ou servidor é necessário.
 
 ## 👨‍💻 Autor
 
-Desenvolvido por **João Vinícius (O Astro do Vôlei)**
+Desenvolvido por **João Vinícius (Melekel)**
 Se quiser contribuir, enviar sugestões ou relatar erros, fique à vontade para abrir issues ou mandar mensagem.
 
 ---
