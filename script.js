@@ -2,7 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 
 
 // CONFIGURAÇÃO
-let spotsLeft = parseInt(localStorage.getItem("spotsLeft")) || 5;
+let spotsLeft = parseInt(localStorage.getItem("spotsLeft")) || 3;
 // Inicializa Ícones
 lucide.createIcons();
 
